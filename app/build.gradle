@@ -25,6 +25,15 @@ android {
     }
 }
 
+ext {
+    live_data_version = '1.0.0-alpha1'
+    anko_version = '0.10.0'
+    rxjava_version = '2.1.0'
+    retrofit_version = '2.0.2'
+    mockito_version = '1.10.19'
+    spek_version = '1.1.2'
+}
+
 dependencies {
     //Android Dependencies
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -37,36 +46,35 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
 
     //Live Data dependency
-    final LIVE_DATA_VERSION = '1.0.0-alpha1'
-    compile "android.arch.lifecycle:extensions:$LIVE_DATA_VERSION"
-    annotationProcessor "android.arch.lifecycle:compiler:$LIVE_DATA_VERSION"
+    compile "android.arch.lifecycle:extensions:$live_data_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$live_data_version"
 
     //Anko
-    final ANKO_VERSION = '0.10.0'
-    compile "org.jetbrains.anko:anko-support-v4:$ANKO_VERSION"
-    compile "org.jetbrains.anko:anko-appcompat-v7:$ANKO_VERSION"
-    compile "org.jetbrains.anko:anko-sdk15:$ANKO_VERSION"
+    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-sdk15:$anko_version"
 
     //DataBinding
     kapt "com.android.databinding:compiler:$android_plugin_version"
 
+    //RxJava 2
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
     //Retrofit 2
-    final RETROFIT_VERSION = '2.0.2'
-    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    compile "io.reactivex.rxjava2:rxjava:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "io.reactivex.rxjava2:rxjava:$retrofit_version"
 
     //Mockito
-    final MOCKITO_VERSION = '1.10.19'
-    testCompile "org.mockito:mockito-core:${MOCKITO_VERSION}"
+    testCompile "org.mockito:mockito-core:${mockito_version}"
     testCompile 'junit:junit:4.12'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M2'
 
-    final SPEK_VERSION = '1.1.2'
+    //Spek
     testCompile 'org.junit.platform:junit-platform-runner:1.0.0-M4'
-    testCompile "org.jetbrains.spek:spek-api:$SPEK_VERSION"
-    testCompile "org.jetbrains.spek:spek-junit-platform-engine:$SPEK_VERSION"
-    testCompile "org.jetbrains.spek:spek-subject-extension:$SPEK_VERSION"
+    testCompile "org.jetbrains.spek:spek-api:$spek_version"
+    testCompile "org.jetbrains.spek:spek-junit-platform-engine:$spek_version"
+    testCompile "org.jetbrains.spek:spek-subject-extension:$spek_version"
     testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"

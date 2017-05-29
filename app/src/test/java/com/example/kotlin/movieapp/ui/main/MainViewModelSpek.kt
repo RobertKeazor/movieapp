@@ -1,4 +1,4 @@
-package com.example.kotlin.movieapp.main
+package com.example.kotlin.movieapp.ui.main
 
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.context
