@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="viewModel" type="com.example.kotlin.movieapp.main.MainViewModel"/>
+        <variable name="viewModel" type="com.example.kotlin.movieapp.ui.main.MainViewModel"/>
     </data>
     <LinearLayout
         android:orientation="vertical"
@@ -10,10 +10,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.firstName}"/>
+            android:text="@{viewModel.title}"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.lastName}"/>
+            android:text="@{viewModel.counter}"/>
     </LinearLayout>
 </layout>
