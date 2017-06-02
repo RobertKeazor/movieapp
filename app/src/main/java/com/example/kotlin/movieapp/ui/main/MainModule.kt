@@ -1,6 +1,7 @@
 package com.example.kotlin.movieapp.ui.main
 
 import com.example.kotlin.movieapp.app.App
+import com.example.kotlin.movieapp.repo.MovieRepository
 import com.example.kotlin.movieapp.ui.base.ViewScope
 import dagger.Module
 import dagger.Provides
@@ -9,5 +10,6 @@ import dagger.Provides
 class MainModule {
     @Provides
     @ViewScope
-    fun provideMainViewModelFactory(app: App) = MainViewModel.Factory(app)
+    fun provideMainViewModelFactory(app: App, movieRepository: MovieRepository) =
+            MainViewModel.Factory(app, movieRepository)
 }

@@ -1,4 +1,4 @@
-package com.example.kotlin.movieapp.extensions
+package com.example.kotlin.movieapp.ext
 
 import android.app.Activity
 import com.example.kotlin.movieapp.app.App

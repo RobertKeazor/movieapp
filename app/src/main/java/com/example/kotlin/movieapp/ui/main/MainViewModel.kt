@@ -4,23 +4,45 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.ObservableField
+import com.example.kotlin.movieapp.ext.plusAssign
+import com.example.kotlin.movieapp.model.Movie
+import com.example.kotlin.movieapp.repo.MovieRepository
 import com.example.kotlin.movieapp.ui.base.BaseViewModel
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposables
-import java.util.concurrent.TimeUnit
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 
-class MainViewModel(application: Application) : BaseViewModel(application) {
-    val title = "Counter"
-    val counter: ObservableField<String> = ObservableField()
-    var counterDisposable = Disposables.disposed()
+class MainViewModel(application: Application, movieRepository: MovieRepository) : BaseViewModel(application) {
+    val title = "Movies"
+    val data: ObservableField<String> = ObservableField()
+    var disposables = CompositeDisposable()
 
     init {
-        counterDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
-                .subscribe({ count -> counter.set(count.toString()) })
+        disposables += movieRepository.topRated(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onGetTopRatedSuccess, this::onGetTopRatedError)
     }
 
-    class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
+    private fun onGetTopRatedSuccess(movies: List<Movie>) {
+        data.set(
+                StringBuilder().apply {
+                    movies.forEach {
+                        append("${it.id} - ${it.name}")
+                        append(System.lineSeparator())
+                    }
+                }.toString()
+        )
+    }
+
+    private fun onGetTopRatedError(error: Throwable) {
+        data.set(error.toString())
+    }
+
+    override fun onCleared() {
+        disposables.dispose()
+    }
+
+    class Factory(private val application: Application, private val movieRepository: MovieRepository) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>) = MainViewModel(application) as T
+        override fun <T : ViewModel> create(modelClass: Class<T>) = MainViewModel(application, movieRepository) as T
     }
 }
