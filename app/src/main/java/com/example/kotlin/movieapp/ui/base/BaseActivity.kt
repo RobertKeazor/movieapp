@@ -6,25 +6,29 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import com.android.databinding.library.baseAdapters.BR
+import javax.inject.Inject
 
-abstract class BaseActivity<VM: BaseViewModel, VDB: ViewDataBinding> : LifecycleActivity() {
-    protected lateinit var viewModelFactory: ViewModelProvider.Factory
+abstract class BaseActivity<V, VM: BaseViewModel, VMF: ViewModelProvider.Factory, VDB: ViewDataBinding, out C: BaseComponent<V>> : LifecycleActivity() {
     protected abstract val viewModelClass: Class<VM>
     protected abstract val layoutResId: Int
+    protected abstract val component: C
+
+    @Inject
+    protected lateinit var viewModelFactory: VMF
     protected lateinit var viewModel: VM
     protected lateinit var viewBinding: VDB
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onBeforeViewLoad(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView<VDB>(this, layoutResId)
-        injectDependencies()
+        component.inject(this as V)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
-        setupViewBinding()
+        viewBinding.setVariable(BR.viewModel, viewModel)
         onViewLoad(savedInstanceState)
     }
-
-    abstract fun setupViewBinding()
 
     open fun onBeforeViewLoad(savedInstanceState: Bundle?) {
         //Intentionally empty so that subclasses can override if necessary
@@ -33,6 +37,4 @@ abstract class BaseActivity<VM: BaseViewModel, VDB: ViewDataBinding> : Lifecycle
     open fun onViewLoad(savedInstanceState: Bundle?) {
         //Intentionally empty so that subclasses can override if necessary
     }
-
-    abstract fun injectDependencies()
 }

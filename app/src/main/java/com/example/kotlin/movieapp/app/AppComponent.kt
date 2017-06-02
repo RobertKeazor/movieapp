@@ -1,7 +1,7 @@
 package com.example.kotlin.movieapp.app
 
-import com.example.kotlin.movieapp.ui.dagger.components.MainComponent
-import com.example.kotlin.movieapp.ui.dagger.modules.MainModule
+import com.example.kotlin.movieapp.ui.main.MainComponent
+import com.example.kotlin.movieapp.ui.main.MainModule
 import dagger.Component
 import javax.inject.Singleton
 
