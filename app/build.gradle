@@ -32,6 +32,8 @@ ext {
     retrofit_version = '2.0.2'
     mockito_version = '2.8.9'
     spek_version = '1.1.2'
+    dagger_version ='2.10'
+    javax_version = '10.0-b28'
 }
 
 dependencies {
@@ -64,6 +66,11 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
     compile "io.reactivex.rxjava2:rxjava:$retrofit_version"
+
+    //Dagger 2
+    compile "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    provided "org.glassfish:javax.annotation:$javax_version"
 
     //Mockito
     testCompile "org.mockito:mockito-core:${mockito_version}"

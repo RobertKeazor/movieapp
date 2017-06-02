@@ -4,16 +4,24 @@ import android.app.Application
 
 class App : Application() {
 
+    val component: AppComponent by lazy {
+        DaggerAppComponent
+                .builder()
+                .appModule(AppModule(this))
+                .build()
+    }
+
     companion object {
         @JvmStatic
         lateinit var get: App
-
-        @JvmStatic
-        val modules: AppModule = AppModule.INSTANCE
     }
+
 
     override fun onCreate() {
         get = this
         super.onCreate()
+        component.inject(this)
+
     }
 }
+
