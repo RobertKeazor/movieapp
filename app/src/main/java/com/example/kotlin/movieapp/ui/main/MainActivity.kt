@@ -8,5 +8,11 @@ import com.example.kotlin.movieapp.ui.base.BaseActivity
 class MainActivity : BaseActivity<MainActivity, MainViewModel, MainViewModel.Factory, ActivityMainBinding, MainComponent>() {
     override val viewModelClass = MainViewModel::class.java
     override val layoutResId = R.layout.activity_main
-    override val component by lazy { app.component.plus(MainModule()) }
+    override val component by lazy {
+        DaggerMainComponent
+                .builder()
+                .appComponent(app.component)
+                .mainModule(MainModule())
+                .build()
+    }
 }
