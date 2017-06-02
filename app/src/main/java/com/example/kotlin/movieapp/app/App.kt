@@ -11,17 +11,8 @@ class App : Application() {
                 .build()
     }
 
-    companion object {
-        @JvmStatic
-        lateinit var get: App
-    }
-
-
     override fun onCreate() {
-        get = this
         super.onCreate()
         component.inject(this)
-
     }
 }
-
