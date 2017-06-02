@@ -8,7 +8,7 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 
 abstract class BaseActivity<VM: BaseViewModel, VDB: ViewDataBinding> : LifecycleActivity() {
-    protected abstract val viewModelFactory: ViewModelProvider.Factory
+    protected lateinit var viewModelFactory: ViewModelProvider.Factory
     protected abstract val viewModelClass: Class<VM>
     protected abstract val layoutResId: Int
     protected lateinit var viewModel: VM
@@ -17,8 +17,9 @@ abstract class BaseActivity<VM: BaseViewModel, VDB: ViewDataBinding> : Lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onBeforeViewLoad(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
         viewBinding = DataBindingUtil.setContentView<VDB>(this, layoutResId)
+        injectDependencies()
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
         setupViewBinding()
         onViewLoad(savedInstanceState)
     }
@@ -32,4 +33,6 @@ abstract class BaseActivity<VM: BaseViewModel, VDB: ViewDataBinding> : Lifecycle
     open fun onViewLoad(savedInstanceState: Bundle?) {
         //Intentionally empty so that subclasses can override if necessary
     }
+
+    abstract fun injectDependencies()
 }
