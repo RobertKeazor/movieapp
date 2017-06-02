@@ -2,7 +2,7 @@ package com.example.kotlin.movieapp.ui.main
 
 import com.example.kotlin.movieapp.R
 import com.example.kotlin.movieapp.databinding.ActivityMainBinding
-import com.example.kotlin.movieapp.extensions.app
+import com.example.kotlin.movieapp.ext.app
 import com.example.kotlin.movieapp.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<MainActivity, MainViewModel, MainViewModel.Factory, ActivityMainBinding, MainComponent>() {

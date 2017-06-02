@@ -1,6 +1,8 @@
 package com.example.kotlin.movieapp.app
 
 import android.app.Application
+import com.example.kotlin.movieapp.BuildConfig
+import timber.log.Timber
 
 class App : Application() {
 
@@ -8,11 +10,23 @@ class App : Application() {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
+                .mapperModule(MapperModule(this))
+                .networkModule(NetworkModule(this))
+                .repositoryModule(RepositoryModule(this))
                 .build()
     }
 
     override fun onCreate() {
         super.onCreate()
         component.inject(this)
+
+        setupLogging()
+    }
+
+    private fun setupLogging() {
+        Timber.uprootAll()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }
