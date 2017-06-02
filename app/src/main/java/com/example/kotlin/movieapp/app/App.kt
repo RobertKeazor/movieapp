@@ -4,7 +4,7 @@ import android.app.Application
 
 class App : Application() {
 
-    val component: AppComponent by lazy {
+    val component by lazy {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
