@@ -8,7 +8,7 @@ import dagger.Provides
 @Module
 class MainModule {
     @Provides
-    fun provideMainModelViewFactory(app: App): MainViewModel.Factory {
+    fun provideMainViewModelFactory(app: App): MainViewModel.Factory {
         return MainViewModel.Factory(app)
     }
 }
