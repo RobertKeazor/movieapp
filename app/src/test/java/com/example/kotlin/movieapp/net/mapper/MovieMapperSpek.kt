@@ -10,7 +10,7 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
-internal class MovieMapperTest : Spek({
+internal class MovieMapperSpek : Spek({
     var movieMapper = MovieMapper()
 
     describe("testing movie mapper") {
@@ -31,8 +31,8 @@ internal class MovieMapperTest : Spek({
             val actual = movieMapper.transform(expected)
 
             it("should eqal movie values") {
-                actual.get(0).name.should.be.equal(expected.results.get(0).title)
-                actual.get(0).id.should.be.equal(expected.results.get(0).id)
+                actual[0].name.should.be.equal(expected.results.get(0).title)
+                actual[0].id.should.be.equal(expected.results.get(0).id)
             }
         }
     }

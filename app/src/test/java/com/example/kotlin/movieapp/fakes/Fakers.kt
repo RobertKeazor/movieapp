@@ -45,11 +45,7 @@ object Fakers {
                     video = videoFake,
                     voteAverage = voteAverageFake)
 
-    fun generateMovie(idFake: Int = 90210,
-                      nameFake: String = "Mr Test") =
-
-        Movie(
-                id = idFake,
-                name = nameFake)
+    fun generateMovie(idFake: Int = 90210, nameFake: String = "Mr Test") =
+            Movie(id = idFake, name = nameFake)
 }
 

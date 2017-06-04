@@ -18,7 +18,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
 @RunWith(JUnitPlatform::class)
-internal class MovieRepositoryTest : Spek({
+internal class MovieRepositorySpek : Spek({
 
     var movieResultData = Fakers.generateMovieResultData()
     var movie = Fakers.generateMovie()
@@ -51,6 +51,4 @@ internal class MovieRepositoryTest : Spek({
                 }
             }
     }
-
-
 })
