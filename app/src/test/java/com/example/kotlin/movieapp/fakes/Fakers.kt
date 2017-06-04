@@ -1,10 +1,11 @@
-package com.example.kotlin.movieapp
+package com.example.kotlin.movieapp.fakes
 
+import com.example.kotlin.movieapp.model.Movie
 import com.example.kotlin.movieapp.net.data.MovieData
 import com.example.kotlin.movieapp.net.data.MovieResultData
 
 object Fakers {
-    fun genarateMovieResultData(pageFake: Int = Math.random().toInt(),
+    fun generateMovieResultData(pageFake: Int = Math.random().toInt(),
                                 resultsFake: List<MovieData> = listOf(generateMovieData()),
                                 totalResultsFake: Int = Math.random().toInt(),
                                 totalPagesFake: Int = Math.random().toInt()) =
@@ -43,4 +44,12 @@ object Fakers {
                     voteCount = voteCountFake,
                     video = videoFake,
                     voteAverage = voteAverageFake)
+
+    fun generateMovie(idFake: Int = 90210,
+                      nameFake: String = "Mr Test") =
+
+        Movie(
+                id = idFake,
+                name = nameFake)
 }
+
