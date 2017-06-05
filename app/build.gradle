@@ -3,29 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "de.mannodermaus.android-junit5"
 
-android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
-    defaultConfig {
-        applicationId "com.example.kotlin.movieapp"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    dataBinding {
-        enabled = true
-    }
-}
+project.ext {
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    minSdkVersion = 19
+    targetSdkVersion = 25
+    versionCode = 1
+    versionName = '1.0'
 
-ext {
+    support_library_version = '25.3.1'
+    constraint_layout_version = '1.0.2'
     live_data_version = '1.0.0-alpha1'
     anko_version = '0.10.0'
     rxandroid_version = '2.0.1'
@@ -39,6 +26,28 @@ ext {
     javax_version = '10.0-b28'
 }
 
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.example.kotlin.movieapp"
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode project.ext.versionCode
+        versionName project.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
 dependencies {
     //Android Dependencies
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,13 +55,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:appcompat-v7:$support_library_version"
+    compile "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    compile "com.android.support:design:$support_library_version"
 
     //Live Data dependency
     compile "android.arch.lifecycle:extensions:$live_data_version"
+    compile "android.arch.persistence.room:runtime:$live_data_version"
     annotationProcessor "android.arch.lifecycle:compiler:$live_data_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$live_data_version"
 
     //Anko
     compile "org.jetbrains.anko:anko-support-v4:$anko_version"
