@@ -43,6 +43,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/app_debug.kotlin_module'
+    }
     dataBinding {
         enabled = true
     }
@@ -62,8 +65,11 @@ dependencies {
     //Live Data dependency
     compile "android.arch.lifecycle:extensions:$live_data_version"
     compile "android.arch.persistence.room:runtime:$live_data_version"
+    compile "android.arch.persistence.room:rxjava2:$live_data_version"
     annotationProcessor "android.arch.lifecycle:compiler:$live_data_version"
     annotationProcessor "android.arch.persistence.room:compiler:$live_data_version"
+    kapt "android.arch.lifecycle:compiler:$live_data_version"
+    kapt "android.arch.persistence.room:compiler:$live_data_version"
 
     //Anko
     compile "org.jetbrains.anko:anko-support-v4:$anko_version"
@@ -115,12 +121,7 @@ dependencies {
     testCompile junitJupiter()
 }
 
-kapt {
-    generateStubs = true
-}
-
 repositories {
     mavenCentral()
-
     maven { url "https://jitpack.io" }
 }
