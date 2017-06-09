@@ -10,6 +10,8 @@ class App : Application() {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
+                .databaseModule(DatabaseModule(this))
+                .managerModule(ManagerModule(this))
                 .mapperModule(MapperModule(this))
                 .networkModule(NetworkModule(this))
                 .repositoryModule(RepositoryModule(this))

@@ -1,6 +1,6 @@
 package com.example.kotlin.movieapp.app
 
-import com.example.kotlin.movieapp.repo.MovieRepository
+import com.example.kotlin.movieapp.manager.MovieManager
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,6 +8,8 @@ import javax.inject.Singleton
 @Component(
         modules = arrayOf(
                 AppModule::class,
+                DatabaseModule::class,
+                ManagerModule::class,
                 MapperModule::class,
                 NetworkModule::class,
                 RepositoryModule::class
@@ -16,7 +18,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(app: App)
 
-    fun getApp(): App
+    val app: App
 
-    fun getMovieRepository(): MovieRepository
+    val movieManager: MovieManager
 }

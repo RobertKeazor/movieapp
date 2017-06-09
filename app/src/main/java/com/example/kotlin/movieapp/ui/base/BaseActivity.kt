@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import com.android.databinding.library.baseAdapters.BR
+import com.example.kotlin.movieapp.BR
 import javax.inject.Inject
 
 abstract class BaseActivity<V, VM: BaseViewModel, VMF: ViewModelProvider.Factory, VDB: ViewDataBinding, out C: BaseComponent<V>> : LifecycleActivity() {
