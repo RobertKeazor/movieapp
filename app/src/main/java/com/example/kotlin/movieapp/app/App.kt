@@ -5,7 +5,6 @@ import com.example.kotlin.movieapp.BuildConfig
 import timber.log.Timber
 
 class App : Application() {
-
     val component by lazy {
         DaggerAppComponent
                 .builder()
@@ -23,6 +22,7 @@ class App : Application() {
         component.inject(this)
 
         setupLogging()
+        instance = this
     }
 
     private fun setupLogging() {
@@ -30,5 +30,10 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+    }
+
+    companion object {
+        lateinit var instance: App
+            private set
     }
 }
