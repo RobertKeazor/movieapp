@@ -12,7 +12,9 @@ object RecyclerViewBinding {
     @JvmStatic
     @BindingAdapter("bind:items")
     fun setupItems(recyclerView: RecyclerView, items: ObservableArrayList<Movie>) {
+        var adapter = MovieList(items)
+        items.addOnListChangedCallback(adapter.onListChangeListener)
         recyclerView.layoutManager = LinearLayoutManager(App.instance)
-        recyclerView.adapter = MovieList(items)
+        recyclerView.adapter = adapter
     }
 }

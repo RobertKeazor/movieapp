@@ -1,6 +1,6 @@
 package com.example.kotlin.movieapp.model
 
 data class Movie(
-        val id: Int,
+        val id: String,
         val name: String
 )
