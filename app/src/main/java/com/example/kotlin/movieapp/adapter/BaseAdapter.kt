@@ -28,7 +28,7 @@ abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapte
         }
 
         override fun onItemRangeInserted(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
-            notifyDataSetChanged()
+            notifyItemInserted(positionStart)
         }
 
         override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
@@ -45,13 +45,7 @@ abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapte
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder =
         BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),  getLayout(), parent, false))
 
-
     override fun getItemCount() = items.size
 }
 
 class BaseViewHolder(val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root)
-
-
-
-
-
