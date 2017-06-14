@@ -5,7 +5,6 @@ import android.databinding.ObservableArrayList
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.kotlin.movieapp.adapter.MovieList
-import com.example.kotlin.movieapp.app.App
 import com.example.kotlin.movieapp.model.Movie
 
 object RecyclerViewBinding {
@@ -14,7 +13,7 @@ object RecyclerViewBinding {
     fun setupItems(recyclerView: RecyclerView, items: ObservableArrayList<Movie>) {
         var adapter = MovieList(items)
         items.addOnListChangedCallback(adapter.onListChangeListener)
-        recyclerView.layoutManager = LinearLayoutManager(App.instance)
+        recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         recyclerView.adapter = adapter
     }
 }

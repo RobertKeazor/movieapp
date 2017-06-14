@@ -6,7 +6,7 @@ import com.example.kotlin.movieapp.net.data.MovieResultData
 
 class MovieDataMapper {
     fun transform(movieData: MovieData) = Movie(
-            id = movieData.id.toString(),
+            id = movieData.id,
             name = movieData.title
     )
 

@@ -8,7 +8,7 @@ class MovieEntityMapper {
             .map { transform(it)}
 
     fun transform(movieEntity: MovieEntity) = Movie(
-            id = movieEntity.id.toString(),
+            id = movieEntity.id,
             name = movieEntity.title
     )
 
@@ -20,7 +20,7 @@ class MovieEntityMapper {
             adult = false,
             overview = "",
             releaseDate = "",
-            id = movie.id.toInt(),
+            id = movie.id,
             originalTitle = "",
             originalLanguage = "",
             title = movie.name,

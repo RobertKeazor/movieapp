@@ -15,25 +15,20 @@ abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapte
     abstract fun getItemForPosition(position: Int): T
 
     val onListChangeListener = object: ObservableList.OnListChangedCallback<ObservableList<T>>() {
-        override fun onItemRangeRemoved(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
-            notifyItemRangeChanged(positionStart, itemCount)
-        }
+        override fun onItemRangeRemoved(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
 
-        override fun onChanged(sender: ObservableList<T>?) {
-            notifyDataSetChanged()
-        }
 
-        override fun onItemRangeMoved(sender: ObservableList<T>?, positionStart: Int, toPosition: Int, itemCount: Int) {
-            notifyDataSetChanged()
-        }
+        override fun onChanged(sender: ObservableList<T>?) = notifyDataSetChanged()
 
-        override fun onItemRangeInserted(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
-            notifyItemInserted(positionStart)
-        }
 
-        override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) {
-           notifyItemRangeChanged(positionStart, itemCount)
-        }
+        override fun onItemRangeMoved(sender: ObservableList<T>?, positionStart: Int, toPosition: Int, itemCount: Int) = notifyDataSetChanged()
+
+
+        override fun onItemRangeInserted(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemInserted(positionStart)
+
+
+        override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
+
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder?, position: Int) {

@@ -22,7 +22,6 @@ class App : Application() {
         component.inject(this)
 
         setupLogging()
-        instance = this
     }
 
     private fun setupLogging() {
@@ -30,10 +29,5 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-    }
-
-    companion object {
-        lateinit var instance: App
-            private set
     }
 }
