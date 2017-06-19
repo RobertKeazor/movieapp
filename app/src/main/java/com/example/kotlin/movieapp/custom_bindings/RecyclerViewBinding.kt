@@ -9,10 +9,9 @@ import com.example.kotlin.movieapp.model.Movie
 
 object RecyclerViewBinding {
     @JvmStatic
-    @BindingAdapter("bind:items")
+    @BindingAdapter("items")
     fun setupItems(recyclerView: RecyclerView, items: ObservableArrayList<Movie>) {
         var adapter = MovieList(items)
-        items.addOnListChangedCallback(adapter.onListChangeListener)
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         recyclerView.adapter = adapter
     }

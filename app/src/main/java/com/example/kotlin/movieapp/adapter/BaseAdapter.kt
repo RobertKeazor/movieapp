@@ -14,32 +14,22 @@ abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapte
 
     abstract fun getItemForPosition(position: Int): T
 
-    val onListChangeListener = object: ObservableList.OnListChangedCallback<ObservableList<T>>() {
-        override fun onItemRangeRemoved(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
-
-
-        override fun onChanged(sender: ObservableList<T>?) = notifyDataSetChanged()
-
-
-        override fun onItemRangeMoved(sender: ObservableList<T>?, positionStart: Int, toPosition: Int, itemCount: Int) = notifyDataSetChanged()
-
-
-        override fun onItemRangeInserted(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemInserted(positionStart)
-
-
-        override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
-
+    init {
+        items.addOnListChangedCallback(object: ObservableList.OnListChangedCallback<ObservableList<T>>() {
+            override fun onItemRangeRemoved(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
+            override fun onChanged(sender: ObservableList<T>?) = notifyDataSetChanged()
+            override fun onItemRangeMoved(sender: ObservableList<T>?, positionStart: Int, toPosition: Int, itemCount: Int) = notifyDataSetChanged()
+            override fun onItemRangeInserted(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemInserted(positionStart)
+            override fun onItemRangeChanged(sender: ObservableList<T>?, positionStart: Int, itemCount: Int) = notifyItemRangeChanged(positionStart, itemCount)
+        })
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder?, position: Int) {
         holder?.binding?.setVariable(BR.item, getItemForPosition(position))
         holder?.binding?.executePendingBindings()
-        items.addOnListChangedCallback(onListChangeListener)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder =
-        BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),  getLayout(), parent, false))
-
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder = BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),  getLayout(), parent, false))
     override fun getItemCount() = items.size
 }
 
