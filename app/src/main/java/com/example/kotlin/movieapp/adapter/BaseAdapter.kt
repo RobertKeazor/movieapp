@@ -10,7 +10,7 @@ import com.example.kotlin.movieapp.BR
 
 abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapter<BaseViewHolder>() {
 
-    abstract fun getLayout(): Int
+    abstract fun getLayout(position: Int): Int
 
     abstract fun getItemForPosition(position: Int): T
 
@@ -29,7 +29,7 @@ abstract class BaseAdapter<T>(val items: ObservableList<T>): RecyclerView.Adapte
         holder?.binding?.executePendingBindings()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder = BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),  getLayout(), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup?, position: Int): BaseViewHolder = BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),  getLayout(position), parent, false))
     override fun getItemCount() = items.size
 }
 
