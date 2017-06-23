@@ -8,8 +8,9 @@ class MovieManager(val movieDatabaseRepository: MovieDatabaseRepository, val mov
     fun topRated(page: Int) = Flowable.merge (
             movieDatabaseRepository.topRated(),
             movieNetworkRepository.topRated(page)
+                    .onErrorReturn { emptyList() }
                     .filter {
-                        if (it != movieDatabaseRepository.topRatedAsList()) {
+                        if (it.isNotEmpty() && it != movieDatabaseRepository.topRatedAsList()) {
                             movieDatabaseRepository.deleteAll()
                             movieDatabaseRepository.addMovies(it)
                         }

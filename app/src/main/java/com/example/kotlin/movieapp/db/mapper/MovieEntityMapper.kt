@@ -9,14 +9,15 @@ class MovieEntityMapper {
 
     fun transform(movieEntity: MovieEntity) = Movie(
             id = movieEntity.id,
-            name = movieEntity.title
+            name = movieEntity.title,
+            posterPath = movieEntity.posterPath
     )
 
     fun transformMovies(movies: List<Movie>) = movies
             .mapIndexed { index, movie -> transformMovie(index, movie) }
 
     fun transformMovie(order: Int, movie: Movie) = MovieEntity(
-            posterPath = "",
+            posterPath = movie.posterPath,
             adult = false,
             overview = "",
             releaseDate = "",
