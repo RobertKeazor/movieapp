@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="viewModel" type="com.example.kotlin.movieapp.ui.main.MainViewModel"/>
+        <variable
+            name="viewModel" type="com.example.kotlin.movieapp.ui.main.MainViewModel"/>
     </data>
     <LinearLayout
         android:orientation="vertical"
@@ -15,5 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.data}"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:items="@{viewModel.movies}"/>
     </LinearLayout>
 </layout>

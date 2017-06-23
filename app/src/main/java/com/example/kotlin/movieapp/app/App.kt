@@ -5,7 +5,6 @@ import com.example.kotlin.movieapp.BuildConfig
 import timber.log.Timber
 
 class App : Application() {
-
     val component by lazy {
         DaggerAppComponent
                 .builder()

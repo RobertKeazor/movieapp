@@ -3,6 +3,7 @@ package com.example.kotlin.movieapp.ui.main
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.databinding.ObservableArrayList
 import android.databinding.ObservableField
 import com.example.kotlin.movieapp.ext.plusAssign
 import com.example.kotlin.movieapp.manager.MovieManager
@@ -16,6 +17,7 @@ class MainViewModel(application: Application, movieManager: MovieManager) : Base
     val data: ObservableField<String> = ObservableField()
     var disposables = CompositeDisposable()
     var initialized: Boolean = false
+    val movies: ObservableArrayList<Movie> = ObservableArrayList()
 
     init {
         disposables += movieManager.topRated(1)
@@ -26,27 +28,17 @@ class MainViewModel(application: Application, movieManager: MovieManager) : Base
     private fun onGetTopRatedSuccess(movies: List<Movie>) {
         if (initialized) {
             //TODO: Notify user that new data is available, for now we immediately display it
-            updateData(movies)
+            this.movies.addAll(movies)
         } else {
             initialized = true
             if (movies.isEmpty()) {
                 //TODO: Brand new state = show loading screen, for now we just show some text
                 data.set("Loading Movies...")
             } else {
-                updateData(movies)
+                this.movies.addAll(movies)
             }
         }
-    }
 
-    private fun updateData(movies: List<Movie>) {
-        data.set(
-                StringBuilder().apply {
-                    movies.forEach {
-                        append("${it.id} - ${it.name}")
-                        append(System.lineSeparator())
-                    }
-                }.toString()
-        )
     }
 
     private fun onGetTopRatedError(error: Throwable) {
