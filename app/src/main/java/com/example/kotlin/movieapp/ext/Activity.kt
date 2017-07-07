@@ -5,3 +5,5 @@ import com.example.kotlin.movieapp.app.App
 
 val Activity.app: App
     get() = application as App
+
+

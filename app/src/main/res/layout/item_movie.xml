@@ -12,12 +12,12 @@
     </data>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:onClick="@{(view) -> handler.onMovieClick(item)}">
+        android:layout_height="220dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
+            android:onClick="@{(view) -> handler.onMovieClick(item)}"
             app:imageUrl="@{item.posterPath}"
             tools:src="@color/colorAccent"/>
         <View

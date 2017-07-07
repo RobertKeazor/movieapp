@@ -15,4 +15,6 @@ class MainActivity : BaseActivity<MainActivity, MainViewModel, MainViewModel.Fac
                 .mainModule(MainModule())
                 .build()
     }
+
+
 }
