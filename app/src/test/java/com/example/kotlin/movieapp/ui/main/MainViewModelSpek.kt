@@ -11,7 +11,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
 @RunWith(JUnitPlatform::class)
-class MainViewModelSpek : Spek ({
+internal class MainViewModelSpek : Spek ({
     //TODO This is not a actual ViewModelSpek. Replace with actual Spek, when real app code is introduced
     describe("mocking with mockito in spek") {
 
