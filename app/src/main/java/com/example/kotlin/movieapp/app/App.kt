@@ -13,6 +13,7 @@ class App : Application() {
                 .managerModule(ManagerModule(this))
                 .mapperModule(MapperModule(this))
                 .networkModule(NetworkModule(this))
+                .navigatorModule(NavigatorModule(this))
                 .repositoryModule(RepositoryModule(this))
                 .build()
     }
