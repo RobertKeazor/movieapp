@@ -15,3 +15,4 @@ class MovieInfoModule {
         MovieInfoViewModel.Factory(app, navigator, movieManager)
 
 }
+

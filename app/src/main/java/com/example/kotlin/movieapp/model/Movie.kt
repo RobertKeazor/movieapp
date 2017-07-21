@@ -6,7 +6,8 @@ import android.os.Parcelable
 data class Movie(
         val id: Int,
         val name: String,
-        val posterPath: String?
+        val posterPath: String?,
+        val backdrop: String?
 ) : Parcelable {
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Movie> = object : Parcelable.Creator<Movie> {
@@ -18,6 +19,7 @@ data class Movie(
     constructor(source: Parcel) : this(
     source.readInt(),
     source.readString(),
+    source.readString(),
     source.readString()
     )
 
@@ -27,5 +29,6 @@ data class Movie(
         dest.writeInt(id)
         dest.writeString(name)
         dest.writeString(posterPath)
+        dest.writeString(backdrop)
     }
 }

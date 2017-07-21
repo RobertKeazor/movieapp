@@ -1,8 +1,10 @@
 package com.example.kotlin.movieapp.ui.movieInfo
 
+import android.os.Bundle
 import com.example.kotlin.movieapp.R
 import com.example.kotlin.movieapp.databinding.ActivityMovieInfoBinding
 import com.example.kotlin.movieapp.ext.app
+import com.example.kotlin.movieapp.model.Movie
 import com.example.kotlin.movieapp.ui.base.BaseActivity
 
 class MovieInfoActivity : BaseActivity<MovieInfoActivity, MovieInfoViewModel, MovieInfoViewModel.Factory, ActivityMovieInfoBinding, MovieInfoComponent>() {
@@ -14,5 +16,9 @@ class MovieInfoActivity : BaseActivity<MovieInfoActivity, MovieInfoViewModel, Mo
                 .appComponent(app.component)
                 .movieInfoModule(MovieInfoModule())
                 .build()
+    }
+
+    override fun onViewLoad(savedInstanceState: Bundle?) {
+      viewModel.movie =  intent.getParcelableExtra<Movie>("movieExtra")
     }
 }

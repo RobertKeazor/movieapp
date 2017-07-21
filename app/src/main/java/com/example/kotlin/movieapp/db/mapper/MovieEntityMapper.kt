@@ -10,7 +10,8 @@ class MovieEntityMapper {
     fun transform(movieEntity: MovieEntity) = Movie(
             id = movieEntity.id,
             name = movieEntity.title,
-            posterPath = movieEntity.posterPath
+            posterPath = movieEntity.posterPath,
+            backdrop = movieEntity.backdropPath
     )
 
     fun transformMovies(movies: List<Movie>) = movies
@@ -25,7 +26,7 @@ class MovieEntityMapper {
             originalTitle = "",
             originalLanguage = "",
             title = movie.name,
-            backdropPath = "",
+            backdropPath = movie.backdrop,
             popularity = 0.0,
             voteCount = 0,
             video = false,
