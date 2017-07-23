@@ -1,4 +1,4 @@
-package com.example.kotlin.movieapp.ui.main
+package com.example.kotlin.movieapp.ui.movieInfo
 
 import com.example.kotlin.movieapp.app.App
 import com.example.kotlin.movieapp.manager.MovieManager
@@ -8,9 +8,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainModule {
+class MovieInfoModule {
     @Provides
     @ViewScope
-    fun provideMainViewModelFactory(app: App, movieManager: MovieManager, navigator: Navigator) =
-            MainViewModel.Factory(app, movieManager, navigator)
+    fun provideMovieInfoViewModelFactory(app: App, navigator: Navigator, movieManager: MovieManager) =
+        MovieInfoViewModel.Factory(app, navigator, movieManager)
+
 }
+

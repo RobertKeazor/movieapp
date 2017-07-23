@@ -27,6 +27,7 @@ abstract class BaseActivity<V, VM: BaseViewModel, VMF: ViewModelProvider.Factory
         component.inject(this as V)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
         viewBinding.setVariable(BR.viewModel, viewModel)
+        viewModel.view = this
         onViewLoad(savedInstanceState)
     }
 

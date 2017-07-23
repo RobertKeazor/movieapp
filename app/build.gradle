@@ -51,10 +51,6 @@ android {
     dataBinding {
         enabled = true
     }
-    dexOptions {
-        incremental true
-        javaMaxHeapSize "4g"
-    }
 }
 
 dependencies {
@@ -109,6 +105,10 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    //ConstraintLayouts
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     //Timber Logging
     compile "com.github.ajalt:timberkt:$timber_version"

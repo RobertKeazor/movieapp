@@ -8,12 +8,13 @@ import com.example.kotlin.movieapp.adapter.ActionHandler
 import com.example.kotlin.movieapp.ext.plusAssign
 import com.example.kotlin.movieapp.manager.MovieManager
 import com.example.kotlin.movieapp.model.Movie
+import com.example.kotlin.movieapp.navigator.Navigator
 import com.example.kotlin.movieapp.ui.base.BaseViewModel
 import com.github.ajalt.timberkt.Timber
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class MainViewModel(application: Application, movieManager: MovieManager) : BaseViewModel(application), ActionHandler {
+class MainViewModel(application: Application, movieManager: MovieManager, val navigator: Navigator) : BaseViewModel(application), ActionHandler {
     private var disposables = CompositeDisposable()
     private var initialized: Boolean = false
     val movies: ObservableArrayList<Movie> = ObservableArrayList()
@@ -44,15 +45,15 @@ class MainViewModel(application: Application, movieManager: MovieManager) : Base
     }
 
     override fun onMovieClick(movie: Movie) {
-        Timber.d{ movie.name }
+        navigator.showMovieInfoView(view, movie)
     }
 
     override fun onCleared() {
         disposables.dispose()
     }
 
-    class Factory(private val application: Application, private val movieManager: MovieManager) : ViewModelProvider.NewInstanceFactory() {
+    class Factory(private val application: Application, private val movieManager: MovieManager, private val  navigator: Navigator) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>) = MainViewModel(application, movieManager) as T
+        override fun <T : ViewModel> create(modelClass: Class<T>) = MainViewModel(application, movieManager, navigator) as T
     }
 }
