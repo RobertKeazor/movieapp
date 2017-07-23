@@ -9,7 +9,8 @@ class MovieDataMapper {
             id = movieData.id,
             name = movieData.title,
             posterPath = "https://image.tmdb.org/t/p/w500/${movieData.posterPath}",
-            backdrop = "https://image.tmdb.org/t/p/w500/${movieData.backdropPath}"
+            backdrop = "https://image.tmdb.org/t/p/w500/${movieData.backdropPath}",
+            releaseDate = movieData.releaseDate
     )
 
     fun transform(movieResultData: MovieResultData) = movieResultData.results

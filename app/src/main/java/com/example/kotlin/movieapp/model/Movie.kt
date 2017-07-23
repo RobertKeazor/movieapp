@@ -7,7 +7,8 @@ data class Movie(
         val id: Int,
         val name: String,
         val posterPath: String?,
-        val backdrop: String?
+        val backdrop: String?,
+        val releaseDate: String
 ) : Parcelable {
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Movie> = object : Parcelable.Creator<Movie> {
@@ -20,6 +21,7 @@ data class Movie(
     source.readInt(),
     source.readString(),
     source.readString(),
+    source.readString(),
     source.readString()
     )
 
@@ -30,5 +32,6 @@ data class Movie(
         dest.writeString(name)
         dest.writeString(posterPath)
         dest.writeString(backdrop)
+        dest.writeString(releaseDate)
     }
 }

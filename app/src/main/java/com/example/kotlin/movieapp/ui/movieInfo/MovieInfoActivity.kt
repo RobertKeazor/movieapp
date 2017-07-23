@@ -19,6 +19,8 @@ class MovieInfoActivity : BaseActivity<MovieInfoActivity, MovieInfoViewModel, Mo
     }
 
     override fun onViewLoad(savedInstanceState: Bundle?) {
-      viewModel.movie =  intent.getParcelableExtra<Movie>("movieExtra")
+      var movie =  intent.getParcelableExtra<Movie>("movieExtra")
+      viewModel.movie =  movie
+      viewModel.date =  movie.releaseDate
     }
 }
